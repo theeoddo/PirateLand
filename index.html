@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PirateLand</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #b48bff, #7dd3fc, #b48bff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s infinite ease-in-out;
+        }
+        @keyframes movingOutline {
+            0% { border-color: #7dd3fc; }
+            50% { border-color: #b48bff; }
+            100% { border-color: #7dd3fc; }
+        }
+        .outline-box {
+            border: 2px solid #7dd3fc;
+            animation: movingOutline 3s infinite alternate;
+            transition: transform 0.3s ease-in-out;
+        }
+        .outline-box:hover {
+            transform: scale(1.05);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        /* Star Trail Effect */
+        .trail {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px white;
+            animation: fadeOut 0.5s linear forwards;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white" onmousemove="createTrail(event)">
+    <header class="p-5 flex justify-between items-center fade-in">
+        <h1 class="text-3xl font-bold">PirateLand 🏴‍☠️</h1>
+    </header>
+    <main class="text-center py-16 fade-in">
+        <h2 class="text-5xl font-extrabold gradient-text">Welcome to PirateLand</h2>
+        <p class="text-lg mt-4">Your gateway to the best piracy-related resources on the internet.</p>
+    </main>
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pb-16 fade-in">
+        <div class="bg-gray-800 p-5 rounded-lg text-center outline-box">
+            <h3 class="text-xl font-bold">PirateEasySearch 🦜</h3>
+            <p class="text-gray-400">Easily search for pirated media with a few clicks.</p>
+            <a href="https://theeoddo.github.io/PirateEasySearch/" class="mt-4 inline-block bg-blue-400 px-6 py-3 rounded text-white">Visit</a>
+        </div>
+    </section>
+    <script>
+        function createTrail(event) {
+            let trail = document.createElement("div");
+            trail.classList.add("trail");
+            document.body.appendChild(trail);
+            trail.style.left = `${event.clientX}px`;
+            trail.style.top = `${event.clientY}px`;
+            setTimeout(() => trail.remove(), 500);
+        }
+    </script>
+</body>
+</html>
